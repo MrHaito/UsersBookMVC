@@ -11,6 +11,7 @@ import ru.klopskiy.usersbook.model.Book;
 import ru.klopskiy.usersbook.model.Person;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/books")
@@ -35,9 +36,14 @@ public class BookController {
     public String get(@PathVariable("id") int id,
                       @ModelAttribute("owner") Person person,
                       Model model) {
+        Optional<Person> bookOwner = booksDAO.getOwner(id);
+
         model.addAttribute("book", booksDAO.get(id));
-        model.addAttribute("person", booksDAO.getOwner(id));
-        model.addAttribute("persons", personDAO.getAll());
+        if (bookOwner.isPresent()) {
+            model.addAttribute("person", bookOwner.get());
+        } else {
+            model.addAttribute("persons", personDAO.getAll());
+        }
         return "books/get";
     }
 

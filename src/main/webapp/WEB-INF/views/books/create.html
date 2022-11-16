@@ -6,6 +6,7 @@
 </head>
 <body>
 <div th:insert="fragments/header :: menu"></div>
+
 <form th:method="post" th:action="@{/books}" th:object="${book}">
     <label for="title">Введите название книги: </label>
     <input type="text" th:field="*{title}" id="title">
@@ -21,5 +22,6 @@
     <br/>
     <input type="submit" value="Создать!">
 </form>
+
 </body>
 </html>

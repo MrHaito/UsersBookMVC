@@ -8,6 +8,7 @@ import ru.klopskiy.usersbook.model.Book;
 import ru.klopskiy.usersbook.model.Person;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class BooksDAO {
@@ -44,13 +45,13 @@ public class BooksDAO {
         jdbcTemplate.update("delete from books where book_id=?", id);
     }
 
-    public Person getOwner(int id) {
+    public Optional<Person> getOwner(int id) {
         return jdbcTemplate.query("select * " +
                                           "from persons " +
                                           "join books " +
                                           "on persons.person_id = books.person_id " +
                                           "where book_id=?", new Object[]{id}, new BeanPropertyRowMapper<>(Person.class)).stream()
-                .findAny().orElse(null);
+                .findAny();
     }
 
     public void addOwner(int bookId, int personId) {

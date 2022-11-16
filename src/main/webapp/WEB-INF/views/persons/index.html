@@ -6,11 +6,13 @@
 </head>
 <body>
 <div th:insert="fragments/header :: menu"></div>
+
 <div th:each="person : ${persons}">
-<a th:href="@{/persons/{id}(id=${person.getPerson_id()})}"
-   th:text="${person.getName()} + ', ' + ${person.getYearOfBirth()}">person</a><br/>
+    <a th:href="@{/persons/{id}(id=${person.getPerson_id()})}"
+       th:text="${person.getName()} + ', ' + ${person.getYearOfBirth()}">person</a><br/>
 </div>
-<hr />
+
+<hr/>
 <a href="/persons/new">Добавить человека</a>
 </body>
 </html>

@@ -24,7 +24,7 @@ public class PersonValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         Person person = (Person) target;
-        if (personDAO.get(person.getPerson_id()) != null) {
+        if (personDAO.getPersonByName(person.getName()).isPresent()) {
             errors.rejectValue("name", "", "Имя должно быть уникальным");
         }
     }

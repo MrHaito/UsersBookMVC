@@ -6,6 +6,7 @@
 </head>
 <body>
 <div th:insert="fragments/header :: menu"></div>
+
 <form th:method="PATCH" th:action="@{/persons/{id}(id=${person.getPerson_id()})}" th:object="${person}">
     <label for="name">Введите ФИО: </label>
     <input type="text" th:field="*{name}" id="name">
@@ -17,5 +18,6 @@
     <br/>
     <input type="submit" value="Редактировать!">
 </form>
+
 </body>
 </html>

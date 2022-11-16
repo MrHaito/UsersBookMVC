@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 import ru.klopskiy.usersbook.model.Book;
 import ru.klopskiy.usersbook.model.Person;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class PersonDAO {
@@ -39,6 +39,10 @@ public class PersonDAO {
 
     public void delete(int id) {
         jdbcTemplate.update("delete from persons where person_id=?", id);
+    }
+
+    public Optional<Person> getPersonByName(String name) {
+        return jdbcTemplate.query("select * from persons where name=?", new Object[]{name}, rowMapper).stream().findAny();
     }
 
     public List<Book> getBooksByPersonId(int id) {
