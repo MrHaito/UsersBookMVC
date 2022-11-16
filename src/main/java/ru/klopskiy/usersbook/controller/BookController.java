@@ -20,9 +20,9 @@ public class BookController {
     private final PersonDAO personDAO;
 
     @Autowired
-    public BookController(BooksDAO booksDAO, PersonDAO personDAO, PersonDAO personDAO1) {
+    public BookController(BooksDAO booksDAO, PersonDAO personDAO) {
         this.booksDAO = booksDAO;
-        this.personDAO = personDAO1;
+        this.personDAO = personDAO;
     }
 
     @GetMapping()
